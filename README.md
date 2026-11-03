@@ -1,44 +1,133 @@
-# BorjStay 2.0 - Hotel Operations System
+# Stay Borj - Hotel Operations Management Demo
 
-A portfolio-grade, local-first hotel management application. The interface was deliberately designed to feel calm and human rather than like a generic admin template.
+Stay Borj is an independent, local-first hotel operations management demo developed for portfolio and educational purposes.
 
-## Product scope
-- Operational dashboard with occupancy, movement, revenue and activity trail
-- Guest directory with protected reservation history
-- Room inventory, nightly pricing, capacity and maintenance status
-- Reservation workflow with date-overlap prevention and capacity validation
-- Check-in and check-out actions
-- Payment recording and outstanding balance tracking
-- Reports by status and booking source
-- CSV export
+The application demonstrates how a hotel team can manage guests, rooms, reservations, check-in and check-out operations, payments, and reports through a clear and responsive interface.
+
+> **Important:** This repository is an independently developed portfolio demonstration. It does not contain the original source code, database, private design, confidential business logic, or customer information of any software previously delivered to a client. All displayed data is fictional.
+
+## Project Background
+
+The idea for Stay Borj was informed by practical experience understanding real business and hotel management workflows.
+
+This public version was designed and developed independently from scratch to demonstrate my software engineering skills without exposing client-owned source code, confidential systems, private databases, employee information, or customer data.
+
+## Main Features
+
+- Operational dashboard with occupancy and revenue indicators
+- Guest profile management
+- Room inventory, pricing, capacity, floor, and status tracking
+- Reservation creation and management
+- Reservation date-conflict prevention
+- Room capacity and maintenance validation
+- Check-in and check-out workflows
+- Payment recording and outstanding balance calculation
+- Reservation status and booking source tracking
+- Recent activity history
+- Operational reports
+- CSV reservation export
 - REST API documentation at `/docs`
-- Responsive interface and fictional seed data
+- Responsive interface for desktop and mobile
+- Fictional demonstration records
 
-## Architecture
-- `main.py`: FastAPI routes, business rules and SQLAlchemy models
-- `static/app.js`: page controllers, API client and UI state
-- `static/style.css`: responsive design system
-- `static/index.html`: application shell
-- `borjstay.db`: local SQLite database, generated on first run
+## Business Rules
 
-## Run
+- Check-out must be after check-in.
+- A room cannot be reserved for overlapping dates.
+- A room under maintenance cannot accept reservations.
+- Guest count cannot exceed room capacity.
+- A payment cannot exceed the remaining balance.
+- Guests linked to reservation history are protected from accidental deletion.
+- Check-in and check-out actions update the room status.
+
+These rules are enforced by the backend API, not only by the interface.
+
+## Technology Stack
+
+### Backend
+
+- Python
+- FastAPI
+- SQLAlchemy
+- Pydantic
+- SQLite
+- REST API
+
+### Frontend
+
+- HTML5
+- CSS3
+- JavaScript
+- Responsive Web Design
+
+### Development Tools
+
+- Git
+- GitHub
+- GitHub Desktop
+- Visual Studio Code
+
+## Project Structure
+
+```text
+stay-borj-hotel-demo/
+|-- main.py
+|-- requirements.txt
+|-- README.md
+|-- .gitignore
+`-- static/
+    |-- index.html
+    |-- style.css
+    `-- app.js
+```
+
+## Run Locally
+
 ```powershell
+git clone https://github.com/medoussema2007/stay-borj-hotel-demo.git
+cd stay-borj-hotel-demo
 python -m venv .venv
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 .\.venv\Scripts\Activate.ps1
 python -m pip install -r requirements.txt
 python -m uvicorn main:app --reload
 ```
-Open `http://127.0.0.1:8000`.
 
-## Reset demo data
-Stop the server, delete `borjstay.db`, then start the server again.
+Open the application at `http://127.0.0.1:8000`.
 
-## Maintenance rules used
-- One source of truth for business rules in the API
-- No real hotel or guest data in the public demo
-- Room overlap is blocked at the backend, not only in the interface
-- Records with reservation history are protected from accidental deletion
-- Room capacity and maintenance state are validated before booking
+Open the API documentation at `http://127.0.0.1:8000/docs`.
 
-## Portfolio description
-Designed and developed BorjStay, a local-first hotel operations system using Python, FastAPI, SQLAlchemy, SQLite and vanilla JavaScript. The product manages guests, rooms, reservations, check-in and check-out workflows, payments, reporting and CSV exports. I implemented backend validation for room availability, date conflicts, capacity limits and financial balances, then created a responsive interface focused on clarity for front-desk staff.
+## Reset Demo Data
+
+Stop the server with `Ctrl + C`, delete `borjstay.db`, and start the server again. A new local database with fictional demonstration records will be generated automatically.
+
+## Privacy and Confidentiality
+
+This repository does not include:
+
+- Real customer or employee information
+- Private hotel records or production databases
+- Passwords, credentials, or API keys
+- Client-owned source code
+- Original commercial designs
+- Confidential business rules
+- Camera-monitoring functionality
+- Private organization workflows
+
+## Public Demo Scope
+
+Stay Borj is a portfolio demonstration, not a production-ready property management system. A production deployment would require secure authentication, password hashing, role-based access control, database migrations, automated backups, PostgreSQL, HTTPS, automated tests, monitoring, audit logs, and documented recovery procedures.
+
+## Development Note
+
+AI-assisted tools were used for brainstorming, debugging, documentation support, and code review. The application structure, feature selection, interface customization, business rules, testing decisions, and final implementation were reviewed and managed by the developer.
+
+## Developer
+
+**Mohamed Oussema Marzougui**
+
+Software Developer focused on full-stack applications, business software, Python backend development, REST APIs, SQL databases, AI integration, and workflow automation.
+
+## License
+
+No license is currently provided. The source code is publicly visible for portfolio review and educational evaluation. Public visibility does not grant permission to copy, redistribute, sell, or reuse the complete project as a commercial product.
