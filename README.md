@@ -10,11 +10,11 @@ The application demonstrates how a hotel team can manage guests, rooms, reservat
 
 The idea for Stay Borj was informed by practical experience understanding real business and hotel management workflows.
 
-This public version was designed and developed independently from scratch to demonstrate my software engineering skills without exposing client-owned source code, confidential systems, private databases, employee information, or customer data.
+This public version was designed and developed independently from scratch to demonstrate software engineering skills without exposing client-owned source code, confidential systems, private databases, employee information, or customer data.
 
 ## Main Features
 
-- Operational dashboard with occupancy and revenue indicators
+- Operational dashboard with occupancy, arrivals, departures, revenue, and outstanding balance indicators
 - Guest profile management
 - Room inventory, pricing, capacity, floor, and status tracking
 - Reservation creation and management
@@ -24,21 +24,47 @@ This public version was designed and developed independently from scratch to dem
 - Payment recording and outstanding balance calculation
 - Reservation status and booking source tracking
 - Recent activity history
-- Operational reports
+- Operational and financial reports
 - CSV reservation export
-- REST API documentation at `/docs`
+- Interactive REST API documentation at `/docs`
 - Responsive interface for desktop and mobile
 - Fictional demonstration records
 
+## Application Screenshots
+
+### Operations Dashboard
+
+![Stay Borj operations dashboard](screenshots/dashboard.png)
+
+### Reservation Management
+
+![Stay Borj reservation management](screenshots/reservations.png)
+
+### Guest Directory
+
+![Stay Borj guest directory](screenshots/guests.png)
+
+### Room Inventory
+
+![Stay Borj room inventory](screenshots/rooms.png)
+
+### Business Reports
+
+![Stay Borj business reports](screenshots/reports.png)
+
+### REST API Documentation
+
+![Stay Borj REST API documentation](screenshots/api-docs.png)
+
 ## Business Rules
 
-- Check-out must be after check-in.
+- The check-out date must be after the check-in date.
 - A room cannot be reserved for overlapping dates.
-- A room under maintenance cannot accept reservations.
+- A room under maintenance cannot accept new reservations.
 - Guest count cannot exceed room capacity.
-- A payment cannot exceed the remaining balance.
-- Guests linked to reservation history are protected from accidental deletion.
-- Check-in and check-out actions update the room status.
+- A payment cannot exceed the remaining reservation balance.
+- Guest records linked to reservation history are protected from accidental deletion.
+- Check-in and check-out actions update the operational room status.
 
 These rules are enforced by the backend API, not only by the interface.
 
@@ -75,48 +101,113 @@ stay-borj-hotel-demo/
 |-- requirements.txt
 |-- README.md
 |-- .gitignore
+|-- screenshots/
+|   |-- dashboard.png
+|   |-- reservations.png
+|   |-- guests.png
+|   |-- rooms.png
+|   |-- reports.png
+|   `-- api-docs.png
 `-- static/
     |-- index.html
     |-- style.css
     `-- app.js
 ```
 
-## Run Locally
+## Run the Project Locally
+
+### 1. Clone the repository
 
 ```powershell
 git clone https://github.com/medoussema2007/stay-borj-hotel-demo.git
+```
+
+### 2. Open the project folder
+
+```powershell
 cd stay-borj-hotel-demo
+```
+
+### 3. Create a virtual environment
+
+```powershell
 python -m venv .venv
+```
+
+### 4. Allow activation in the current PowerShell session
+
+```powershell
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+```
+
+### 5. Activate the virtual environment
+
+```powershell
 .\.venv\Scripts\Activate.ps1
+```
+
+### 6. Install the dependencies
+
+```powershell
 python -m pip install -r requirements.txt
+```
+
+### 7. Start the application
+
+```powershell
 python -m uvicorn main:app --reload
 ```
 
-Open the application at `http://127.0.0.1:8000`.
+Open the application at:
 
-Open the API documentation at `http://127.0.0.1:8000/docs`.
+```text
+http://127.0.0.1:8000
+```
 
-## Reset Demo Data
+Open the REST API documentation at:
 
-Stop the server with `Ctrl + C`, delete `borjstay.db`, and start the server again. A new local database with fictional demonstration records will be generated automatically.
+```text
+http://127.0.0.1:8000/docs
+```
+
+## Reset the Demo Data
+
+Stop the server with `Ctrl + C`, delete the local `borjstay.db` file, and start the server again:
+
+```powershell
+python -m uvicorn main:app --reload
+```
+
+The application automatically creates a new local database with fictional demonstration records.
 
 ## Privacy and Confidentiality
 
 This repository does not include:
 
-- Real customer or employee information
+- Real hotel customer or employee information
 - Private hotel records or production databases
 - Passwords, credentials, or API keys
 - Client-owned source code
-- Original commercial designs
-- Confidential business rules
+- Original commercial application designs
+- Confidential client business rules
 - Camera-monitoring functionality
 - Private organization workflows
 
 ## Public Demo Scope
 
-Stay Borj is a portfolio demonstration, not a production-ready property management system. A production deployment would require secure authentication, password hashing, role-based access control, database migrations, automated backups, PostgreSQL, HTTPS, automated tests, monitoring, audit logs, and documented recovery procedures.
+Stay Borj is a portfolio demonstration, not a production-ready property management system.
+
+A production deployment would additionally require:
+
+- Secure authentication and password hashing
+- Role-based access control
+- Database migrations
+- Automated backups
+- PostgreSQL or another production database
+- HTTPS configuration
+- Automated tests and security testing
+- Error monitoring and audit logs
+- Data-protection and recovery procedures
 
 ## Development Note
 
@@ -130,4 +221,6 @@ Software Developer focused on full-stack applications, business software, Python
 
 ## License
 
-No license is currently provided. The source code is publicly visible for portfolio review and educational evaluation. Public visibility does not grant permission to copy, redistribute, sell, or reuse the complete project as a commercial product.
+No license is currently provided for this repository.
+
+The source code is publicly visible for portfolio review and educational evaluation. Public visibility does not grant permission to copy, redistribute, sell, or reuse the complete project as a commercial product.
